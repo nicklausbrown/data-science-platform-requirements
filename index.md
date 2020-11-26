@@ -12,6 +12,8 @@ This document outlines the key requirements for an enterprise data science platf
 This doc reflects in a very detailed way the various pieces that are needed for such a “factory”. Note that these requirements are not specific to the Iguazio Data Science Platform and they are based on a list of requirements made by our customers. It also outlines the requirements from the point of view of the various stakeholders: Data Scientists, Data Engineers, and DevOps.
 
 # Seminal Papers and Blogs on DSci Platforms
+We stand on the shoulders of giants. Many amazing engineers and scientists have come before to help pave a clearer vision of what MLOps and Data Science platforms should look like. These are many of the resources I have been inspired by, and I encourage addition here. If you are totally unfamiliar with production machine learning, start by reading these articles.
+
 - [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)
 - [The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf)
 - [The Winding Road to Better Machine Learning Infrastructure Through Tensorflow Extended and Kubeflow](https://labs.spotify.com/2019/12/13/the-winding-road-to-better-machine-learning-infrastructure-through-tensorflow-extended-and-kubeflow/)
