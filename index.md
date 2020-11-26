@@ -1,3 +1,7 @@
+
+* TOC
+{:toc}
+
 # Overview
 
 This document outlines the key requirements for an enterprise data science platform. In order to support the growing business demand for new and advanced services that are based on ML, data science, data engineering and DevOps teams are looking for ways to increase productivity and accelerate the time it takes to deliver machine learning models all the way from concept to production. Ideally they would like to focus on writing the code and the business logic for their services rather than dealing with building the infrastructure that supports it. This is where an enterprise data science platform plays a part by providing all the relevant building blocks for running ML pipelines all the way from data collection through data preparation, training, deployment and model monitoring.  
