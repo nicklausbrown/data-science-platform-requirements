@@ -1,5 +1,6 @@
 # Introduction
-This is not data science software or a framework. Neither is it an attempt to build a platform. This is a living document to help consolidate best practices and communicate the data science community's workflows and needs to software and platform developers. It is not meant to be industry specific nor is it meant to be about a particular niche of AI/ML. It is meant to support the broader scientific and engineering goals to which we all aspire. Let's go faster and farther, together. &nbsp;&nbsp;&nbsp;- Nick Brown
+This is not data science software or a framework. Neither is it an attempt to build a platform. This is a living document to help consolidate best practices and communicate the data science community's workflows and needs to software and platform developers. It is not meant to be industry specific nor is it meant to be about a particular niche of AI/ML. It is meant to support the broader scientific and engineering goals to which we all aspire. Let's go faster and farther, together.
+&nbsp;&nbsp;&nbsp;&nbsp;\- Nick Brown
 
 
 # Table of Contents
@@ -41,7 +42,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Supports open source notebook server Jupyter to improve export-ability of notebooks and allows for community plug-ins
 - Has access to a component registry with best-practice components already implemented for many tasks 
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want a notebook server, so that I can focus on analyzing data and modeling, reproduce my peers’ work, easily access internal software tools and popular ML/Analytics libraries “out of the box”, and start working day one — don’t have to worry about infrastructure, overspending or dependencies breaking
 - As a data engineer, I want a notebook server, so that data isn’t being downloaded to local workstations and out of the cloud incurring high costs, I can easily see who is using what data sources in what volume to help optimize access, and I only have to add data source access to one place
 - As a machine learning engineer, I want a notebook server, so that running computationally demanding experiments is as easy as increasing the number of GPUs and selecting a workspace image which includes parallel training software
@@ -57,7 +58,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Namespaces for individual data scientists to store custom workspace images with plug-ins, themes, and specific libraries
 - Strict tagging enforcement based on CI/CD build ID 
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want a workspace registry, so that I can leverage the newest internal software, reproduce my own work as well as my peers’ work, spend more time experimenting instead of installing potentially complicated software
 - As a DevOps engineer, I want a workspace registry, so that I know all work is being done in a secure environment
 - As a software engineer, I want a workspace registry, so that I can deliver the most up to date stable version of data science software I’ve developed with confidence that all dependencies (including operating system level) are installed
@@ -83,7 +84,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Supports data set versioning for different types of underlying data: files and tabular
 - Allows users to compare candidate production models
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want a production training platform, so that I can scale up a few promising experiments using the same code in components, take advantage of prebuilt pipelines, analyze training results for many hyperparameter settings, follow best practices around not seeing the test set, and trigger retraining with ease
 - As a data engineer, I want a production training platform, so that I can prioritize access to data sources for the training platform over the experimentation platform and also across different projects, potentially even provide scheduling for data source intensive jobs
 - As a DevOps engineer, I want a production training platform, so that expensive training jobs must be approved by Git reviewers, data scientists don’t need to know anything about how to provision infrastructure, tests and build success are mandated for training code, and cost is minimized by supporting “by-component” compute
@@ -98,7 +99,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Enables software engineers and data engineers to provide highly optimized components (potentially compiled) for typically slow or compute intensive tasks
 - Has a place where data scientists can request components be built, optimized, and updated
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want a component registry, so that I can spend less time writing the same pre/post-processing code and focus on models/features/ideas; when I solve a custom problem, I can share it as a component with my peers; I can take advantage of optimized components that are written for performance
 - As a data engineer, I want a component registry, so that I can write components that interact with data sources using best practices and avoids data scientists improperly or over/under utilizing a data sources capabilities
 - As a software engineer, I want a component registry, so that I can solve problems for my data science team that is shared across all teams and I know what data scientists are asking for from a component feature standpoint
@@ -131,7 +132,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Has reporting on costs at the component, pipeline, project, and business line levels
 - Generates documentation around inference pipelines input/outputs as well as SLAs
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want an inference system, so that I can quickly and safely ship a model to production which has been thoroughly vetted and uses the components I used in development (preventing code rewrites); I want to use use simple configuration files to express complicated infrastructure requirements reducing DevOps knowledge requirements; I can also do analytics on model inputs and outputs to further improve them and debug issues
 - As a data engineer, I want an inference system, so that I can prioritize data source access based on SLAs in a straightforward way that allows me to prioritize at the division level — if necessary avoiding local optimization on projects, leveraging data access components again here also allows me to solve the problem once
 - As a DevOps engineer, I want an inference system, so that I can govern model deployment and upgrading, define scaling and cost policies by default, guarantee security is being followed with model pipelines (and push it up to higher levels reducing likelihood of secret leaks), and provide fault tolerance with rollbacks and canaries
@@ -153,7 +154,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Performs monitoring on data source dependency changes which alerts when a model has lost support for a feature from a dataset
 - Persists all monitoring data for later more complex analysis
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want a monitoring system, so that I have confidence that models in production are still performing according to business/technical specifications; my time is saved when models/data drifts outside of requirements due to automated retraining, allowing me to focus on current projects instead of having to "stop the world" for retraining; I can look for more complex relationships between model performance by analyzing longer term trends that have been persisted.
 
 ## Feature store for models
@@ -172,7 +173,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Supports any data store (S3, Hadoop, JDBC)
 - Tracks feature metadata and lineage (creation, update, deletions)
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want a feature store for models to ensure that the data I train with and the data the model performs inference on don’t diverge, that I have access to features that are already engineered (reducing workload and duplicative data), and there is ideally a single source of truth for a feature. 
 - As a data engineer, I want a feature store so that I can support multiple teams’ models in a singular location - meaning I can optimize access, priority, and monitoring
 - As a software engineer, I want a feature store so that I can make changes to my code that might affect a feature downstream and notify the teams using that feature of the change before pushing into production and breaking machine learning models.
@@ -188,7 +189,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Samples training records for annotation in simple, stratified, or cluster random sampling accord to data scientists requirements for macro vs micro model evaluation
 - Allows data scientists to register a model with the annotation system when in inference mode to perform ongoing sampling for annotation to feed to the production monitoring system to track “accuracy” in production 
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want an annotation and sampling system to allow me to enjoyably and easily create new training/validation data for problems that are not automatically labeled (or take too long to get labeled). I want the system to allow me to train a baseline model and understand problem feasibility as quickly as possible. I also want to automate inference evaluation for models as much as possible to allow me to move on to new exciting tasks.
 - As a machine learning engineer, I want an annotation and sampling system to formalize how any model will be evaluated in production prior to release. I want sound statistical processes put in place to guarantee confidence of model performance.
 - As a technical manager, I want an annotation and sampling system so that my data scientists can quickly try out new ideas and innovate for the business without having to wait for external annotation.
@@ -199,7 +200,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - API should support a form of versioning  
 - Underlying prediction values should be available if masked by labels, argmax, etc...
 
-### Stakeholder Benefits
+### Stakeholder Motivations
 - As a data scientist, I want a common API, so that I can quickly create inference output for my models, which automatically implements production best practices agreed on by the group
 - Also, as a data engineer, I want a common API to to allow seamless and stable communication between machine learning models and microservices in my big data pipelines 
 -  As a software engineer, I want a common API so that I can support data scientists by providing model output serialization in a SDK and so that my applications can easily consume machine learning predictions
