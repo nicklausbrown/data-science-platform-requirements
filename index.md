@@ -11,6 +11,14 @@ This document outlines the key requirements for an enterprise data science platf
 
 This doc reflects in a very detailed way the various pieces that are needed for such a “factory”. Note that these requirements are not specific to the Iguazio Data Science Platform and they are based on a list of requirements made by our customers. It also outlines the requirements from the point of view of the various stakeholders: Data Scientists, Data Engineers, and DevOps.
 
+# Seminal Papers and Blogs on DSci Platforms
+- [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)
+- [The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf)
+- [The Winding Road to Better Machine Learning Infrastructure Through Tensorflow Extended and Kubeflow](https://labs.spotify.com/2019/12/13/the-winding-road-to-better-machine-learning-infrastructure-through-tensorflow-extended-and-kubeflow/)
+- [Meet Michelangelo: Uber’s Machine Learning Platform](https://eng.uber.com/michelangelo-machine-learning-platform/)
+- [Michelangelo PyML: Introducing Uber’s Platform for Rapid Python ML Model Development](https://eng.uber.com/michelangelo-pyml/)
+- [Turbocharging Analytics at Uber with our Data Science Workbench](https://eng.uber.com/dsw/)
+
 # Requirements
 ## Common API for machine learning models
 ### Implementation Details
@@ -103,6 +111,95 @@ This doc reflects in a very detailed way the various pieces that are needed for 
 - As a software engineer, I want a component registry, so that I can solve problems for my data science team that is shared across all teams and I know what data scientists are asking for from a component feature standpoint
 - As a devops engineer, I want a component registry, so that I have a single place to run tests and builds which should create more consistent production performance for data scientists using the components in pipelines
 - As a technical manager, I want a component registry, so that problems are being solved once and by those who are the experts in that components functionality
+
+## Production inference deployment system
+### Implementation Details
+- Pipelines should replicate any training logic
+- Pipelines allow for definition through standard conditional, aggregating, and dependency config file that is built behind the scenes for micro-batch or stream processing
+- Is the only source of machine learning model prediction (aside from direct software embedded models which should be use case justified)
+- is only accessible through automated build/deploy pipelines from code, meaning supports full software automation of deployment process
+- Is triggered through merge to master
+- Is different from experimental model deployments; this layer has SLAs and governance
+- Is integrated with production monitoring system 
+- Allows for complex inference pipelines which can have multiple models (which can also have their own pre/post-processing pipelines) 
+- Only supports containerized model components in the inference pipelines which include hardening and security
+- Supports low latency stream inference for time sensitive prediction requests that is capable of auto-scaling in response to load (would be cool to use machine learning to predict spiking load)
+- Supports micro-batch processing for large datasets that is capable of scale to zero when there is no load (reducing cost) and can run on preemptible (spot) hardware
+- Supports GPU/CPU for both batch and stream inference with profiling done in the pre-deployment build step to choose hardware type
+- Has access to the pipeline component container registry to use optimized prebuilt processing components 
+- Performs production readiness checks and assigns score for models prior to release pending approval
+- By default logs component input and output payloads to monitoring service as well as to a persistent raw layer for long term storage
+- Requires that models are served using the common api 
+- Supports A/B testing of similar models behind a common endpoint and performs multi-arm bandit to find the optimal model(s)
+- supports canary roll out of model(s) with automated testing to determine any training/serving performance skew with automated rollback
+- Uses an SDK or component to do schema and feature validation/expectation checking with outlier/error logging to production monitoring 
+- Has direct access to the model artifact store for building the final Docker images that will be shipped
+- Has permissions to access data sources built in at the service level (meaning images don’t come with secrets baked in)
+- Has reporting on costs at the component, pipeline, project, and business line levels
+- Generates documentation around inference pipelines input/outputs as well as SLAs
+
+### Stakeholder Benefits
+- As a data scientist, I want an inference system, so that I can quickly and safely ship a model to production which has been thoroughly vetted and uses the components I used in development (preventing code rewrites); I want to use use simple configuration files to express complicated infrastructure requirements reducing DevOps knowledge requirements; I can also do analytics on model inputs and outputs to further improve them and debug issues
+- As a data engineer, I want an inference system, so that I can prioritize data source access based on SLAs in a straightforward way that allows me to prioritize at the division level — if necessary avoiding local optimization on projects, leveraging data access components again here also allows me to solve the problem once
+- As a DevOps engineer, I want an inference system, so that I can govern model deployment and upgrading, define scaling and cost policies by default, guarantee security is being followed with model pipelines (and push it up to higher levels reducing likelihood of secret leaks), and provide fault tolerance with rollbacks and canaries
+- As a software engineer, I want an inference system, so that I can have a centralized location to request predictions from and that I have confidence my SLAs will be supported at the organizational level rather than team by team which allows me to develop software with confidence
+- As a technical manager, I want an inference system, so that I have confidence that models in production come with full production support and vetting, no “thin-air” models, I can also monitor spending on inference for a given task or pipeline to ensure ROI requirements are met
+- As a MLOps engineer, I want an inference system, so that the data necessary to perform data lineage, governance, and performance monitoring is guaranteed to be collected for all production models and that all pipelines (current and historical) are perfectly reproducible — due to containerization, model versioning, etc.
+
+## Production monitoring system
+### Implementation Details
+- Reads directly from all model inference system output streams 
+- Has access to production model training platforms to be able to trigger retraining 
+- Has access to git repos or configuration management solution to perform a model version update for retrained models (this then triggers an inference deployment build/test/approval workflow)
+- Has access to feature data sources to support data drift monitoring
+- Performs data drift monitoring on incoming inference data compared to schema definitions on the input features for all production models
+- Tracks concept for all models in production and can trigger retraining
+- Tracks “staleness” for models either via concept drift or that is manually specified for a model component
+- Provides alerting functionality via email, teams, etc.
+- Monitors performance and SLA requirements such as defined budget, component/pipeline runtime, exception tolerance, batch prediction delivery time
+- Performs monitoring on data source dependency changes which alerts when a model has lost support for a feature from a dataset
+- Persists all monitoring data for later more complex analysis
+
+### Stakeholder Benefits
+- As a data scientist, I want a monitoring system, so that I have confidence that models in production are still performing according to business/technical specifications; my time is saved when models/data drifts outside of requirements due to automated retraining, allowing me to focus on current projects instead of having to "stop the world" for retraining; I can look for more complex relationships between model performance by analyzing longer term trends that have been persisted.
+
+## Feature store for models
+### Implementation Details
+- Provides a way for data scientists to expose and share features between projects and for better collaboration. All features should be available to everyone with minimal effort based on security policies
+- Serves compound features online mainly for prediction and recommendation
+- Prepares feature for offline training
+- Has a standard interface for getting data and share between DS and DE ensuring that training and inference have the same features
+- Enables loading features from streaming engines, files and databases 
+- Easily able to serve large volume of historical features for training
+- Supports real time serving with low latency requirements
+- Ensures feature consistency between training and serving
+- Provides centralized feature management 
+- Accessible by Python SDK (P1) followed by Go and Java 
+- Manages data access and data versioning
+- Supports any data store (S3, Hadoop, JDBC)
+- Tracks feature metadata and lineage (creation, update, deletions)
+
+### Stakeholder Benefits
+- As a data scientist, I want a feature store for models to ensure that the data I train with and the data the model performs inference on don’t diverge, that I have access to features that are already engineered (reducing workload and duplicative data), and there is ideally a single source of truth for a feature. 
+- As a data engineer, I want a feature store so that I can support multiple teams’ models in a singular location - meaning I can optimize access, priority, and monitoring
+- As a software engineer, I want a feature store so that I can make changes to my code that might affect a feature downstream and notify the teams using that feature of the change before pushing into production and breaking machine learning models.
+- As a technical manager, I want a feature store so that I can release new models recently trained with confidence into inference mode, delivering results to the business faster and more consistently 
+
+## Annotation and sampling system
+### Implementation Details
+- Supports all standard target annotation types (category, image segmentation, named entity, etc.) in an attractive UI 
+- Provides a simple way to ingest training records into the feature store if the data is external to the platform
+- Annotations are automatically attached to training records in the feature store along with additional metadata about: who did the annotation, when it was done, if more than one person annotated, if the annotation was done by a software system, if there are discrepancies on the annotation
+- Supports active learning for annotations to reduce time to first model training and prototyping
+- Connects to a simplistic modeling backend which provides baseline model training and evaluation with boosting algorithms (or pretrained NN in some cases) to evaluate if annotation is achieving baseline “accuracy” requirements - indicating that annotation may slow down or stop
+- Samples training records for annotation in simple, stratified, or cluster random sampling accord to data scientists requirements for macro vs micro model evaluation
+- Allows data scientists to register a model with the annotation system when in inference mode to perform ongoing sampling for annotation to feed to the production monitoring system to track “accuracy” in production 
+
+### Stakeholder Benefits
+- As a data scientist, I want an annotation and sampling system to allow me to enjoyably and easily create new training/validation data for problems that are not automatically labeled (or take too long to get labeled). I want the system to allow me to train a baseline model and understand problem feasibility as quickly as possible. I also want to automate inference evaluation for models as much as possible to allow me to move on to new exciting tasks.
+- As a machine learning engineer, I want an annotation and sampling system to formalize how any model will be evaluated in production prior to release. I want sound statistical processes put in place to guarantee confidence of model performance.
+- As a technical manager, I want an annotation and sampling system so that my data scientists can quickly try out new ideas and innovate for the business without having to wait for external annotation.
+
 
 
 
