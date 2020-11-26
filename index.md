@@ -12,9 +12,11 @@ This document outlines the key requirements for an enterprise data science platf
 This doc reflects in a very detailed way the various pieces that are needed for such a “factory”. Note that these requirements are not specific to the Iguazio Data Science Platform and they are based on a list of requirements made by our customers. It also outlines the requirements from the point of view of the various stakeholders: Data Scientists, Data Engineers, and DevOps.
 
 # Requirements
-## Common versioned API for machine learning models
+## Common API for machine learning models
 ### Implementation Details
--  The output is based on task type (classification, regression, multi-label, seq2seq) 
+- The output is based on task type (classification, regression, multi-label, seq2seq)
+- API should support a form of versioning  
+- Underlying prediction values should be available if masked by labels, argmax, etc...
 
 ### Stakeholder Benefits
 - As a data scientist, I want a common API, so that I can quickly create inference output for my models, which automatically implements production best practices agreed on by the group
