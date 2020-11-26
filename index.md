@@ -22,18 +22,6 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - [Turbocharging Analytics at Uber with our Data Science Workbench](https://eng.uber.com/dsw/)
 
 # Requirements
-## Common API for machine learning models
-### Implementation Details
-- The output is based on task type (classification, regression, multi-label, seq2seq)
-- API should support a form of versioning  
-- Underlying prediction values should be available if masked by labels, argmax, etc...
-
-### Stakeholder Benefits
-- As a data scientist, I want a common API, so that I can quickly create inference output for my models, which automatically implements production best practices agreed on by the group
-- Also, as a data engineer, I want a common API to to allow seamless and stable communication between machine learning models and microservices in my big data pipelines 
--  As a software engineer, I want a common API so that I can support data scientists by providing model output serialization in a SDK and so that my applications can easily consume machine learning predictions
-- As a technical manager, I want a common API so that my project teams spend less time fixing breaking jobs and writing custom logic
-
 ## Managed notebook server
 ### Implementation Details
 - Provides authenticated access to main data stores
@@ -202,6 +190,15 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - As a machine learning engineer, I want an annotation and sampling system to formalize how any model will be evaluated in production prior to release. I want sound statistical processes put in place to guarantee confidence of model performance.
 - As a technical manager, I want an annotation and sampling system so that my data scientists can quickly try out new ideas and innovate for the business without having to wait for external annotation.
 
+## Common API for machine learning models
+### Implementation Details
+- The output is based on task type (classification, regression, multi-label, seq2seq)
+- API should support a form of versioning  
+- Underlying prediction values should be available if masked by labels, argmax, etc...
 
-
+### Stakeholder Benefits
+- As a data scientist, I want a common API, so that I can quickly create inference output for my models, which automatically implements production best practices agreed on by the group
+- Also, as a data engineer, I want a common API to to allow seamless and stable communication between machine learning models and microservices in my big data pipelines 
+-  As a software engineer, I want a common API so that I can support data scientists by providing model output serialization in a SDK and so that my applications can easily consume machine learning predictions
+- As a technical manager, I want a common API so that my project teams spend less time fixing breaking jobs and writing custom logic
 
