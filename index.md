@@ -1,37 +1,8 @@
-## Welcome to GitHub Pages
+# Overview
 
-You can use the [editor on GitHub](https://github.com/nicklausbrown/data-science-platform-requirements/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This document outlines the key requirements for an enterprise data science platform. In order to support the growing business demand for new and advanced services that are based on ML, data science, data engineering and DevOps teams are looking for ways to increase productivity and accelerate the time it takes to deliver machine learning models all the way from concept to production. Ideally they would like to focus on writing the code and the business logic for their services rather than dealing with building the infrastructure that supports it. This is where an enterprise data science platform plays a part by providing all the relevant building blocks for running ML pipelines all the way from data collection through data preparation, training, deployment and model monitoring.  
+Eventually more and more customers understand the need for building a machine learning factory which automates the heavy lifting of building machine learning pipelines and microservices.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+This doc reflects in a very detailed way the various pieces that are needed for such a “factory”. Note that these requirements are not specific to the Iguazio Data Science Platform and they are based on a list of requirements made by our customers. It also outlines the requirements from the point of view of the various stakeholders: Data Scientists, Data Engineers, and DevOps.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/nicklausbrown/data-science-platform-requirements/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
