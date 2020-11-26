@@ -1,6 +1,6 @@
 # Introduction
 This is not data science software or a framework. Neither is it an attempt to build a platform. This is a living document to help consolidate best practices and communicate the data science community's workflows and needs to software and platform developers. It is not meant to be industry specific nor is it meant to be about a particular niche of AI/ML. It is meant to support the broader scientific and engineering goals to which we all aspire. Let's go faster and farther, together.
-- Nick Brown
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\- Nick Brown
 
 
 # Table of Contents
