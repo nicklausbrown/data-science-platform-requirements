@@ -89,10 +89,20 @@ This doc reflects in a very detailed way the various pieces that are needed for 
 - As an MLOps engineer, I want a production training platform, so that I can trace data lineage of any model serving predictions in production, can access the model repo for deployment, and can compare training to serving data to track outliers and data drift
 - As a technical manager, I want a production training platform, so that I have transparency on costs while allowing my data scientists to quickly iterate on models; also, I have confidence that the model code being run has been reviewed by the team leads for quality
 
+## Machine learning pipeline component container registry
+### Implementation Details
+- Provides parameterized images which provide common machine learning functionality (preprocessing [i.e. tokenization])
+- Has documentation around the interfaces for the containers as well as recommended compute parameters
+- Ensures that common components are written only once and can be reviewed by top experts in that functionality
+- Enables software engineers and data engineers to provide highly optimized components (potentially compiled) for typically slow or compute intensive tasks
+- Has a place where data scientists can request components be built, optimized, and updated
 
-
-
-
+### Stakeholder Benefits
+- As a data scientist, I want a component registry, so that I can spend less time writing the same pre/post-processing code and focus on models/features/ideas; when I solve a custom problem, I can share it as a component with my peers; I can take advantage of optimized components that are written for performance
+- As a data engineer, I want a component registry, so that I can write components that interact with data sources using best practices and avoids data scientists improperly or over/under utilizing a data sources capabilities
+- As a software engineer, I want a component registry, so that I can solve problems for my data science team that is shared across all teams and I know what data scientists are asking for from a component feature standpoint
+- As a devops engineer, I want a component registry, so that I have a single place to run tests and builds which should create more consistent production performance for data scientists using the components in pipelines
+- As a technical manager, I want a component registry, so that problems are being solved once and by those who are the experts in that components functionality
 
 
 
