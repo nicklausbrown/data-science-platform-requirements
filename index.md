@@ -47,3 +47,52 @@ This doc reflects in a very detailed way the various pieces that are needed for 
 - As a technical manager, I want a notebook server, so that I have transparency into costs and the ability to budget across teams based on the project they’re working on
 - As a devops engineer, I want a notebook server, so that there is a single location for controlling permissions, infrastructure provisioning, and that leverages containers to minimize manual server configuration
 
+## Data science workspace container registry 
+### Implementation Details
+- Contains base images which are hardened and use security best practices
+- Has images with latest internal data science software pre-installed
+- Has lightweight workspace containers for simple notebooks
+- Has workspaces with popular open source ML libraries (Tensorflow, Pandas, Plotly) installed and configured
+- Namespaces for individual data scientists to store custom workspace images with plug-ins, themes, and specific libraries
+- Strict tagging enforcement based on CI/CD build ID 
+
+### Stakeholder Benefits
+- As a data scientist, I want a workspace registry, so that I can leverage the newest internal software, reproduce my own work as well as my peers’ work, spend more time experimenting instead of installing potentially complicated software
+- As a DevOps engineer, I want a workspace registry, so that I know all work is being done in a secure environment
+- As a software engineer, I want a workspace registry, so that I can deliver the most up to date stable version of data science software I’ve developed with confidence that all dependencies (including operating system level) are installed
+- As a machine learning engineer, I want a workspace registry, so that I can create workspace images that have all necessary optimizations to work with underlying host infrastructure when running Tensorflow, XGBoost, etc.
+- As a technical manager, I want a workspace registry, so that I can request any analysis or experiment be reproduced exactly (or parameters changed) based on business partner requests and when new hire ramp-up time is dramatically decreased
+
+## Production training platform
+### Implementation Details
+- Has access to production versions of all data sources approved for data science modeling
+- Is restricted to only service account triggering — cannot be triggered without review
+- Supports pull request, merge to master trigger to start a production training job — ensuring governance, tests pass, build succeeds
+- Supports multi-container workflows (preprocessing vs. training containers) and supports different infrastructure (CPU vs. GPU) for those steps
+- Able to scale out over multi-CPU/GPU automatically without additional code from data scientists — configuration option
+- Has an easy way to define complicated pipelines between different components (DAGs)
+- Uniquely identifies pipelines and runs of those pipelines for reproducibility of a production training job
+- Has predefined pipeline templates that allow components to be swapped out for customization
+- Has access to a component registry with best-practice components already implemented for many tasks 
+- Provides concurrent runs for hyper-parameter tuning in parallel
+- Has access to the test sets for projects which allows for blinding the data scientists
+- Saves models and other artifacts from pipeline runs to versioned stores with metadata for searching automatically without additional code from the data scientists
+- Provides access to data on model training internals, explanations, metrics, and metadata (training dataset name/version, environment build, etc.)
+- Can be run on preemptible (spot) hardware for reduced costs on long running/expensive jobs
+- Supports data set versioning for different types of underlying data: files and tabular
+- Allows users to compare candidate production models
+
+### Stakeholder Benefits
+- As a data scientist, I want a production training platform, so that I can scale up a few promising experiments using the same code in components, take advantage of prebuilt pipelines, analyze training results for many hyperparameter settings, follow best practices around not seeing the test set, and trigger retraining with ease
+- As a data engineer, I want a production training platform, so that I can prioritize access to data sources for the training platform over the experimentation platform and also across different projects, potentially even provide scheduling for data source intensive jobs
+- As a DevOps engineer, I want a production training platform, so that expensive training jobs must be approved by Git reviewers, data scientists don’t need to know anything about how to provision infrastructure, tests and build success are mandated for training code, and cost is minimized by supporting “by-component” compute
+- As an MLOps engineer, I want a production training platform, so that I can trace data lineage of any model serving predictions in production, can access the model repo for deployment, and can compare training to serving data to track outliers and data drift
+- As a technical manager, I want a production training platform, so that I have transparency on costs while allowing my data scientists to quickly iterate on models; also, I have confidence that the model code being run has been reviewed by the team leads for quality
+
+
+
+
+
+
+
+
