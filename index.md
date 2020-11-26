@@ -11,20 +11,19 @@ This document outlines the key requirements for an enterprise data science platf
 
 This doc reflects in a very detailed way the various pieces that are needed for such a “factory”. Note that these requirements are not specific to the Iguazio Data Science Platform and they are based on a list of requirements made by our customers. It also outlines the requirements from the point of view of the various stakeholders: Data Scientists, Data Engineers, and DevOps.
 
-# Common versioned API for machine learning models
-
-## Implementation Details
+# Requirements
+## Common versioned API for machine learning models
+### Implementation Details
 -  The output is based on task type (classification, regression, multi-label, seq2seq) 
 
-## Stakeholder Benefits
+### Stakeholder Benefits
 - As a data scientist, I want a common API, so that I can quickly create inference output for my models, which automatically implements production best practices agreed on by the group
 - Also, as a data engineer, I want a common API to to allow seamless and stable communication between machine learning models and microservices in my big data pipelines 
 -  As a software engineer, I want a common API so that I can support data scientists by providing model output serialization in a SDK and so that my applications can easily consume machine learning predictions
 - As a technical manager, I want a common API so that my project teams spend less time fixing breaking jobs and writing custom logic
 
-# Managed notebook server
-
-## Implementation Details
+## Managed notebook server
+### Implementation Details
 - Provides authenticated access to main data stores
 - Can provision infrastructure through a UI (GPU, CPU, RAM, Disk)
 - Can scale underlying infrastructure to support large and small workloads
@@ -39,7 +38,7 @@ This doc reflects in a very detailed way the various pieces that are needed for 
 - Supports open source notebook server Jupyter to improve export-ability of notebooks and allows for community plug-ins
 - Has access to a component registry with best-practice components already implemented for many tasks 
 
-## Stakeholder Benefits
+### Stakeholder Benefits
 - As a data scientist, I want a notebook server, so that I can focus on analyzing data and modeling, reproduce my peers’ work, easily access internal software tools and popular ML/Analytics libraries “out of the box”, and start working day one — don’t have to worry about infrastructure, overspending or dependencies breaking
 - As a data engineer, I want a notebook server, so that data isn’t being downloaded to local workstations and out of the cloud incurring high costs, I can easily see who is using what data sources in what volume to help optimize access, and I only have to add data source access to one place
 - As a machine learning engineer, I want a notebook server, so that running computationally demanding experiments is as easy as increasing the number of GPUs and selecting a workspace image which includes parallel training software
