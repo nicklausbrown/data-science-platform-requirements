@@ -34,7 +34,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Can scale underlying infrastructure to support large and small workloads
 - Separates different users’ workspaces with managed identity built-in
 - Supports Docker container-based workspaces
-- Has access to a container registry with pre-built workspaces 
+- Has access to a [container registry with pre-built workspaces](#data-science-workspace-container-registry)
 - Can easily share notebooks and workspaces between users
 - Supports version control for notebooks
 - Can scale to zero when not in use
