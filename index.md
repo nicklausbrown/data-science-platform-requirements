@@ -1,5 +1,5 @@
 # Introduction
-This is not data science software or a framework. Neither is it an attempt to build a platform. This is a living document to help consolidate best practices and communicate the data science community's workflows and needs to software and platform developers. It is not meant to be industry specific nor is it meant to be about a particular niche of AI/ML. It is meant to support the broader scientific and engineering goals to which we all aspire. Let's go faster and farther, together.
+Welcome! This is not data science software or a framework. Neither is it an attempt to build a platform. This is a living document to help consolidate best practices and communicate the data science community's workflows and needs to software and platform developers. It is not meant to be industry specific nor is it meant to be about a particular niche of AI/ML. It is meant to support the broader scientific and engineering goals to which we all aspire. Let's go faster and farther, together.
 
 &nbsp;&nbsp;&nbsp;&nbsp; \- Nick Brown
 
@@ -8,6 +8,11 @@ This is not data science software or a framework. Neither is it an attempt to bu
 
 * TOC
 {:toc}
+# Authors
+Nick Brown
+
+# Supporters
+[Iguazio Data Science Platform](https://www.iguazio.com/) - Open Source Projects: Nuclio, MLRun
 
 # Overview
 
