@@ -41,7 +41,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Allows for budgets and alerts around infrastructure costs to prevent overspending
 - Can automatically shutdown idle infrastructure to prevent overspending
 - Supports open source notebook server Jupyter to improve export-ability of notebooks and allows for community plug-ins
-- Has access to a component registry with best-practice components already implemented for many tasks 
+- Has access to a [component registry with best-practice components](#machine-learning-pipeline-component-container-registry) already implemented for many tasks 
 
 ### Stakeholder Motivations
 - As a data scientist, I want a notebook server, so that I can focus on analyzing data and modeling, reproduce my peers’ work, easily access internal software tools and popular ML/Analytics libraries “out of the box”, and start working day one — don’t have to worry about infrastructure, overspending or dependencies breaking
@@ -76,7 +76,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Has an easy way to define complicated pipelines between different components (DAGs)
 - Uniquely identifies pipelines and runs of those pipelines for reproducibility of a production training job
 - Has predefined pipeline templates that allow components to be swapped out for customization
-- Has access to a component registry with best-practice components already implemented for many tasks 
+- Has access to a [component registry with best-practice components](#machine-learning-pipeline-component-container-registry) already implemented for many tasks 
 - Provides concurrent runs for hyper-parameter tuning in parallel
 - Has access to the test sets for projects which allows for blinding the data scientists
 - Saves models and other artifacts from pipeline runs to versioned stores with metadata for searching automatically without additional code from the data scientists
@@ -115,16 +115,16 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - is only accessible through automated build/deploy pipelines from code, meaning supports full software automation of deployment process
 - Is triggered through merge to master
 - Is different from experimental model deployments; this layer has SLAs and governance
-- Is integrated with production monitoring system 
+- Is integrated with [production monitoring system](#production-monitoring-system)
 - Allows for complex inference pipelines which can have multiple models (which can also have their own pre/post-processing pipelines) 
 - Only supports containerized model components in the inference pipelines which include hardening and security
 - Supports low latency stream inference for time sensitive prediction requests that is capable of auto-scaling in response to load (would be cool to use machine learning to predict spiking load)
 - Supports micro-batch processing for large datasets that is capable of scale to zero when there is no load (reducing cost) and can run on preemptible (spot) hardware
 - Supports GPU/CPU for both batch and stream inference with profiling done in the pre-deployment build step to choose hardware type
-- Has access to the pipeline component container registry to use optimized prebuilt processing components 
+- Has access to the [pipeline component container registry](#machine-learning-pipeline-component-container-registry) to use optimized prebuilt processing components 
 - Performs production readiness checks and assigns score for models prior to release pending approval
-- By default logs component input and output payloads to monitoring service as well as to a persistent raw layer for long term storage
-- Requires that models are served using the common api 
+- By default logs component input and output payloads to [monitoring service](#production-monitoring-system) as well as to a persistent raw layer for long term storage
+- Requires that models are served using the [common api](#common-api-for-machine-learning-models) 
 - Supports A/B testing of similar models behind a common endpoint and performs multi-arm bandit to find the optimal model(s)
 - supports canary roll out of model(s) with automated testing to determine any training/serving performance skew with automated rollback
 - Uses an SDK or component to do schema and feature validation/expectation checking with outlier/error logging to production monitoring 
@@ -144,13 +144,13 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 ## Production monitoring system
 ### Implementation Details
 - Reads directly from all model inference system output streams 
-- Has access to production model training platforms to be able to trigger retraining 
+- Has access to [production model training](#production-training-platform) to be able to trigger retraining 
 - Has access to git repos or configuration management solution to perform a model version update for retrained models (this then triggers an inference deployment build/test/approval workflow)
-- Has access to feature data sources to support data drift monitoring
+- Has access to [feature data sources](#feature-store-for-models) to support data drift monitoring
 - Performs data drift monitoring on incoming inference data compared to schema definitions on the input features for all production models
 - Tracks concept for all models in production and can trigger retraining
 - Tracks “staleness” for models either via concept drift or that is manually specified for a model component
-- Provides alerting functionality via email, teams, etc.
+- Provides alerting functionality via email, teams, slack, etc.
 - Monitors performance and SLA requirements such as defined budget, component/pipeline runtime, exception tolerance, batch prediction delivery time
 - Performs monitoring on data source dependency changes which alerts when a model has lost support for a feature from a dataset
 - Persists all monitoring data for later more complex analysis
@@ -160,10 +160,11 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 
 ## Feature store for models
 ### Implementation Details
-- Provides a way for data scientists to expose and share features between projects and for better collaboration. All features should be available to everyone with minimal effort based on security policies
+- Provides a way for data scientists to expose and share features between projects and for better collaboration 
+- All features should be available to everyone with minimal effort based on security policies
 - Serves compound features online mainly for prediction and recommendation
 - Prepares feature for offline training
-- Has a standard interface for getting data and share between DS and DE ensuring that training and inference have the same features
+- Has a standard interface for getting data and share between data scientists and data engineers ensuring that training and inference have the same features
 - Enables loading features from streaming engines, files and databases 
 - Easily able to serve large volume of historical features for training
 - Supports real time serving with low latency requirements
@@ -183,12 +184,12 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 ## Annotation and sampling system
 ### Implementation Details
 - Supports all standard target annotation types (category, image segmentation, named entity, etc.) in an attractive UI 
-- Provides a simple way to ingest training records into the feature store if the data is external to the platform
+- Provides a simple way to ingest training records into the [feature store](#feature-store-for-models) if the data is external to the platform
 - Annotations are automatically attached to training records in the feature store along with additional metadata about: who did the annotation, when it was done, if more than one person annotated, if the annotation was done by a software system, if there are discrepancies on the annotation
 - Supports active learning for annotations to reduce time to first model training and prototyping
 - Connects to a simplistic modeling backend which provides baseline model training and evaluation with boosting algorithms (or pretrained NN in some cases) to evaluate if annotation is achieving baseline “accuracy” requirements - indicating that annotation may slow down or stop
 - Samples training records for annotation in simple, stratified, or cluster random sampling accord to data scientists requirements for macro vs micro model evaluation
-- Allows data scientists to register a model with the annotation system when in inference mode to perform ongoing sampling for annotation to feed to the production monitoring system to track “accuracy” in production 
+- Allows data scientists to register a model with the annotation system when in inference mode to perform ongoing sampling for annotation to feed to the production monitoring system to track prediction performance in production 
 
 ### Stakeholder Motivations
 - As a data scientist, I want an annotation and sampling system to allow me to enjoyably and easily create new training/validation data for problems that are not automatically labeled (or take too long to get labeled). I want the system to allow me to train a baseline model and understand problem feasibility as quickly as possible. I also want to automate inference evaluation for models as much as possible to allow me to move on to new exciting tasks.
