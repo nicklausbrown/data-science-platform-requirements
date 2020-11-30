@@ -12,7 +12,7 @@ Welcome! This is not data science software or a framework. Neither is it an atte
 Nick Brown
 
 # Supporters
-[Iguazio Data Science Platform](https://www.iguazio.com/) - Open Source Projects: Nuclio, MLRun
+[Iguazio Data Science Platform](https://www.iguazio.com/) - Open Source Projects: [Nuclio](https://nuclio.io/), [MLRun](https://mlrun.readthedocs.io/en/latest/)
 
 # Overview
 
