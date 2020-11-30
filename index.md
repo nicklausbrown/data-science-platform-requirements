@@ -163,6 +163,25 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 ### Stakeholder Motivations
 - As a data scientist, I want a monitoring system, so that I have confidence that models in production are still performing according to business/technical specifications; my time is saved when models/data drifts outside of requirements due to automated retraining, allowing me to focus on current projects instead of having to "stop the world" for retraining; I can look for more complex relationships between model performance by analyzing longer term trends that have been persisted.
 
+## Complex inference pipeline service
+### Implementation Details
+- SDK for declaring pipelines implemented in python 3 
+- Generates YAML specifications that the underlying inference pipeline service leverages for immutable deployments
+- Supports synchronous and asynchronous communication between inference pipeline steps
+- Capable of mixing sync/async in a single pipeline
+- Creates "dumb" queues between asynchronous steps and can tune topics/partitions automatically
+- Implements a "batch mode" that prioritizes efficiently processing high volumes of data through the inference pipeline over latency
+- Supports fan-out and fan-in pipeline operations/steps for steps that require high degrees of step parallelization or have dynamic dependencies
+- Allows for retry/SLA/exception tolerance specification in the SDK that connects with [production monitoring system](#production-monitoring-system)
+- Logs model dependencies to the [feature store for models](#feature-store-for-models) - includes the model name, version, API version, and consumed output
+- Able to reference [deployed inference services](#production-inference-deployment-system) in inference pipeline as well as [component container registry](#machine-learning-pipeline-component-container-registry) for yet to be deployed components
+- Is intelligent with respect to running steps in parallel when they have no data dependencies 
+- Supports queue, file system, query, and http request data dependencies between pipeline steps
+- Allows independent job/step scaling within pipelines as opposed to the pipeline being the unit that scales
+
+### Stakeholder Motivations
+- To be added
+
 ## Feature store for models
 ### Implementation Details
 - Provides a way for data scientists to expose and share features between projects and for better collaboration 
