@@ -49,11 +49,11 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Has access to a [component registry with best-practice components](#machine-learning-pipeline-component-container-registry) already implemented for many tasks 
 
 ### Stakeholder Motivations
-- As a data scientist, I want a notebook server, so that I can focus on analyzing data and modeling, reproduce my peers’ work, easily access internal software tools and popular ML/Analytics libraries “out of the box”, and start working day one — don’t have to worry about infrastructure, overspending or dependencies breaking
-- As a data engineer, I want a notebook server, so that data isn’t being downloaded to local workstations and out of the cloud incurring high costs, I can easily see who is using what data sources in what volume to help optimize access, and I only have to add data source access to one place
-- As a machine learning engineer, I want a notebook server, so that running computationally demanding experiments is as easy as increasing the number of GPUs and selecting a workspace image which includes parallel training software
-- As a technical manager, I want a notebook server, so that I have transparency into costs and the ability to budget across teams based on the project they’re working on
-- As a devops engineer, I want a notebook server, so that there is a single location for controlling permissions, infrastructure provisioning, and that leverages containers to minimize manual server configuration
+- As a data scientist, I require a notebook server, so that I can focus on analyzing data and modeling, reproduce my peers’ work, easily access internal software tools and popular ML/Analytics libraries “out of the box”, and start working day one — don’t have to worry about infrastructure, overspending or dependencies breaking
+- As a data engineer, I require a notebook server, so that data isn’t being downloaded to local workstations and out of the cloud incurring high costs, I can easily see who is using what data sources in what volume to help optimize access, and I only have to add data source access to one place
+- As a machine learning engineer, I require a notebook server, so that running computationally demanding experiments is as easy as increasing the number of GPUs and selecting a workspace image which includes parallel training software
+- As a technical manager, I require a notebook server, so that I have transparency into costs and the ability to budget across teams based on the project they’re working on
+- As a devops engineer, I require a notebook server, so that there is a single location for controlling permissions, infrastructure provisioning, and that leverages containers to minimize manual server configuration
 
 ## Data science workspace container registry 
 ### Implementation Details
@@ -65,11 +65,11 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Strict tagging enforcement based on CI/CD build ID 
 
 ### Stakeholder Motivations
-- As a data scientist, I want a workspace registry, so that I can leverage the newest internal software, reproduce my own work as well as my peers’ work, spend more time experimenting instead of installing potentially complicated software
-- As a DevOps engineer, I want a workspace registry, so that I know all work is being done in a secure environment
-- As a software engineer, I want a workspace registry, so that I can deliver the most up to date stable version of data science software I’ve developed with confidence that all dependencies (including operating system level) are installed
-- As a machine learning engineer, I want a workspace registry, so that I can create workspace images that have all necessary optimizations to work with underlying host infrastructure when running Tensorflow, XGBoost, etc.
-- As a technical manager, I want a workspace registry, so that I can request any analysis or experiment be reproduced exactly (or parameters changed) based on business partner requests and when new hire ramp-up time is dramatically decreased
+- As a data scientist, I require a workspace registry, so that I can leverage the newest internal software, reproduce my own work as well as my peers’ work, spend more time experimenting instead of installing potentially complicated software
+- As a DevOps engineer, I require a workspace registry, so that I know all work is being done in a secure environment
+- As a software engineer, I require a workspace registry, so that I can deliver the most up to date stable version of data science software I’ve developed with confidence that all dependencies (including operating system level) are installed
+- As a machine learning engineer, I require a workspace registry, so that I can create workspace images that have all necessary optimizations to work with underlying host infrastructure when running Tensorflow, XGBoost, etc.
+- As a technical manager, I require a workspace registry, so that I can request any analysis or experiment be reproduced exactly (or parameters changed) based on business partner requests and when new hire ramp-up time is dramatically decreased
 
 ## Production training platform
 ### Implementation Details
@@ -78,7 +78,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Supports pull request, merge to master trigger to start a production training job — ensuring governance, tests pass, build succeeds
 - Supports multi-container workflows (preprocessing vs. training containers) and supports different infrastructure (CPU vs. GPU) for those steps
 - Able to scale out over multi-CPU/GPU automatically without additional code from data scientists — configuration option
-- Has an easy way to define complicated pipelines between different components (DAGs)
+- Has a simple, composable way to define complicated pipelines between different components (DAGs)
 - Uniquely identifies pipelines and runs of those pipelines for reproducibility of a production training job
 - Has predefined pipeline templates that allow components to be swapped out for customization
 - Has access to a [component registry with best-practice components](#machine-learning-pipeline-component-container-registry) already implemented for many tasks 
@@ -91,11 +91,11 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Allows users to compare candidate production models
 
 ### Stakeholder Motivations
-- As a data scientist, I want a production training platform, so that I can scale up a few promising experiments using the same code in components, take advantage of prebuilt pipelines, analyze training results for many hyperparameter settings, follow best practices around not seeing the test set, and trigger retraining with ease
-- As a data engineer, I want a production training platform, so that I can prioritize access to data sources for the training platform over the experimentation platform and also across different projects, potentially even provide scheduling for data source intensive jobs
-- As a DevOps engineer, I want a production training platform, so that expensive training jobs must be approved by Git reviewers, data scientists don’t need to know anything about how to provision infrastructure, tests and build success are mandated for training code, and cost is minimized by supporting “by-component” compute
-- As an MLOps engineer, I want a production training platform, so that I can trace data lineage of any model serving predictions in production, can access the model repo for deployment, and can compare training to serving data to track outliers and data drift
-- As a technical manager, I want a production training platform, so that I have transparency on costs while allowing my data scientists to quickly iterate on models; also, I have confidence that the model code being run has been reviewed by the team leads for quality
+- As a data scientist, I require a production training platform, so that I can scale up a few promising experiments using the same code in components, take advantage of prebuilt pipelines, analyze training results for many hyperparameter settings, follow best practices around not seeing the test set, and trigger retraining with ease
+- As a data engineer, I require a production training platform, so that I can prioritize access to data sources for the training platform over the experimentation platform and also across different projects, potentially even provide scheduling for data source intensive jobs
+- As a DevOps engineer, I require a production training platform, so that expensive training jobs must be approved by Git reviewers, data scientists don’t need to know anything about how to provision infrastructure, tests and build success are mandated for training code, and cost is minimized by supporting “by-component” compute
+- As an MLOps engineer, I require a production training platform, so that I can trace data lineage of any model serving predictions in production, can access the model repo for deployment, and can compare training to serving data to track outliers and data drift
+- As a technical manager, I require a production training platform, so that I have transparency on costs while allowing my data scientists to quickly iterate on models; also, I have confidence that the model code being run has been reviewed by the team leads for quality
 
 ## Machine learning pipeline component container registry
 ### Implementation Details
@@ -106,11 +106,11 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Has a place where data scientists can request components be built, optimized, and updated
 
 ### Stakeholder Motivations
-- As a data scientist, I want a component registry, so that I can spend less time writing the same pre/post-processing code and focus on models/features/ideas; when I solve a custom problem, I can share it as a component with my peers; I can take advantage of optimized components that are written for performance
-- As a data engineer, I want a component registry, so that I can write components that interact with data sources using best practices and avoids data scientists improperly or over/under utilizing a data sources capabilities
-- As a software engineer, I want a component registry, so that I can solve problems for my data science team that is shared across all teams and I know what data scientists are asking for from a component feature standpoint
-- As a devops engineer, I want a component registry, so that I have a single place to run tests and builds which should create more consistent production performance for data scientists using the components in pipelines
-- As a technical manager, I want a component registry, so that problems are being solved once and by those who are the experts in that components functionality
+- As a data scientist, I require a component registry, so that I can spend less time writing the same pre/post-processing code and focus on models/features/ideas; when I solve a custom problem, I can share it as a component with my peers; I can take advantage of optimized components that are written for performance
+- As a data engineer, I require a component registry, so that I can write components that interact with data sources using best practices and avoids data scientists improperly or over/under utilizing a data sources capabilities
+- As a software engineer, I require a component registry, so that I can solve problems for my data science team that is shared across all teams and I know what data scientists are asking for from a component feature standpoint
+- As a devops engineer, I require a component registry, so that I have a single place to run tests and builds which should create more consistent production performance for data scientists using the components in pipelines
+- As a technical manager, I require a component registry, so that problems are being solved once and by those who are the experts in that components functionality
 
 ## Production inference deployment system
 ### Implementation Details
@@ -139,12 +139,12 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Generates documentation around inference pipelines input/outputs as well as SLAs
 
 ### Stakeholder Motivations
-- As a data scientist, I want an inference system, so that I can quickly and safely ship a model to production which has been thoroughly vetted and uses the components I used in development (preventing code rewrites); I want to use use simple configuration files to express complicated infrastructure requirements reducing DevOps knowledge requirements; I can also do analytics on model inputs and outputs to further improve them and debug issues
-- As a data engineer, I want an inference system, so that I can prioritize data source access based on SLAs in a straightforward way that allows me to prioritize at the division level — if necessary avoiding local optimization on projects, leveraging data access components again here also allows me to solve the problem once
-- As a DevOps engineer, I want an inference system, so that I can govern model deployment and upgrading, define scaling and cost policies by default, guarantee security is being followed with model pipelines (and push it up to higher levels reducing likelihood of secret leaks), and provide fault tolerance with rollbacks and canaries
-- As a software engineer, I want an inference system, so that I can have a centralized location to request predictions from and that I have confidence my SLAs will be supported at the organizational level rather than team by team which allows me to develop software with confidence
-- As a technical manager, I want an inference system, so that I have confidence that models in production come with full production support and vetting, no “thin-air” models, I can also monitor spending on inference for a given task or pipeline to ensure ROI requirements are met
-- As a MLOps engineer, I want an inference system, so that the data necessary to perform data lineage, governance, and performance monitoring is guaranteed to be collected for all production models and that all pipelines (current and historical) are perfectly reproducible — due to containerization, model versioning, etc.
+- As a data scientist, I require an inference system, so that I can quickly and safely ship a model to production which has been thoroughly vetted and uses the components I used in development (preventing code rewrites); I require to use use simple configuration files to express complicated infrastructure requirements reducing DevOps knowledge requirements; I can also do analytics on model inputs and outputs to further improve them and debug issues
+- As a data engineer, I require an inference system, so that I can prioritize data source access based on SLAs in a straightforward way that allows me to prioritize at the division level — if necessary avoiding local optimization on projects, leveraging data access components again here also allows me to solve the problem once
+- As a DevOps engineer, I require an inference system, so that I can govern model deployment and upgrading, define scaling and cost policies by default, guarantee security is being followed with model pipelines (and push it up to higher levels reducing likelihood of secret leaks), and provide fault tolerance with rollbacks and canaries
+- As a software engineer, I require an inference system, so that I can have a centralized location to request predictions from and that I have confidence my SLAs will be supported at the organizational level rather than team by team which allows me to develop software with confidence
+- As a technical manager, I require an inference system, so that I have confidence that models in production come with full production support and vetting, no “thin-air” models, I can also monitor spending on inference for a given task or pipeline to ensure ROI requirements are met
+- As a MLOps engineer, I require an inference system, so that the data necessary to perform data lineage, governance, and performance monitoring is guaranteed to be collected for all production models and that all pipelines (current and historical) are perfectly reproducible — due to containerization, model versioning, etc.
 
 ## Production monitoring system
 ### Implementation Details
@@ -161,7 +161,7 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Persists all monitoring data for later more complex analysis
 
 ### Stakeholder Motivations
-- As a data scientist, I want a monitoring system, so that I have confidence that models in production are still performing according to business/technical specifications; my time is saved when models/data drifts outside of requirements due to automated retraining, allowing me to focus on current projects instead of having to "stop the world" for retraining; I can look for more complex relationships between model performance by analyzing longer term trends that have been persisted.
+- As a data scientist, I require a monitoring system, so that I have confidence that models in production are still performing according to business/technical specifications; my time is saved when models/data drifts outside of requirements due to automated retraining, allowing me to focus on current projects instead of having to "stop the world" for retraining; I can look for more complex relationships between model performance by analyzing longer term trends that have been persisted.
 
 ## Complex inference pipeline service
 ### Implementation Details
@@ -200,10 +200,10 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Tracks feature metadata and lineage (creation, update, deletions)
 
 ### Stakeholder Motivations
-- As a data scientist, I want a feature store for models to ensure that the data I train with and the data the model performs inference on don’t diverge, that I have access to features that are already engineered (reducing workload and duplicative data), and there is ideally a single source of truth for a feature. 
-- As a data engineer, I want a feature store so that I can support multiple teams’ models in a singular location - meaning I can optimize access, priority, and monitoring
-- As a software engineer, I want a feature store so that I can make changes to my code that might affect a feature downstream and notify the teams using that feature of the change before pushing into production and breaking machine learning models.
-- As a technical manager, I want a feature store so that I can release new models recently trained with confidence into inference mode, delivering results to the business faster and more consistently 
+- As a data scientist, I require a feature store for models to ensure that the data I train with and the data the model performs inference on don’t diverge, that I have access to features that are already engineered (reducing workload and duplicative data), and there is ideally a single source of truth for a feature. 
+- As a data engineer, I require a feature store so that I can support multiple teams’ models in a singular location - meaning I can optimize access, priority, and monitoring
+- As a software engineer, I require a feature store so that I can make changes to my code that might affect a feature downstream and notify the teams using that feature of the change before pushing into production and breaking machine learning models.
+- As a technical manager, I require a feature store so that I can release new models recently trained with confidence into inference mode, delivering results to the business faster and more consistently 
 
 ## Annotation and sampling system
 ### Implementation Details
@@ -216,9 +216,9 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Allows data scientists to register a model with the annotation system when in inference mode to perform ongoing sampling for annotation to feed to the production monitoring system to track prediction performance in production 
 
 ### Stakeholder Motivations
-- As a data scientist, I want an annotation and sampling system to allow me to enjoyably and easily create new training/validation data for problems that are not automatically labeled (or take too long to get labeled). I want the system to allow me to train a baseline model and understand problem feasibility as quickly as possible. I also want to automate inference evaluation for models as much as possible to allow me to move on to new exciting tasks.
-- As a machine learning engineer, I want an annotation and sampling system to formalize how any model will be evaluated in production prior to release. I want sound statistical processes put in place to guarantee confidence of model performance.
-- As a technical manager, I want an annotation and sampling system so that my data scientists can quickly try out new ideas and innovate for the business without having to wait for external annotation.
+- As a data scientist, I require an annotation and sampling system to allow me to enjoyably and easily create new training/validation data for problems that are not automatically labeled (or take too long to get labeled). I require the system to allow me to train a baseline model and understand problem feasibility as quickly as possible. I also want to automate inference evaluation for models as much as possible to allow me to move on to new exciting tasks.
+- As a machine learning engineer, I require an annotation and sampling system to formalize how any model will be evaluated in production prior to release. I require sound statistical processes put in place to guarantee confidence of model performance.
+- As a technical manager, I require an annotation and sampling system so that my data scientists can quickly try out new ideas and innovate for the business without having to wait for external annotation.
 
 ## Common API for machine learning models
 ### Implementation Details
@@ -227,8 +227,8 @@ We stand on the shoulders of giants. Many amazing engineers and scientists have 
 - Underlying prediction values should be available if masked by labels, argmax, etc...
 
 ### Stakeholder Motivations
-- As a data scientist, I want a common API, so that I can quickly create inference output for my models, which automatically implements production best practices agreed on by the group
-- Also, as a data engineer, I want a common API to to allow seamless and stable communication between machine learning models and microservices in my big data pipelines 
--  As a software engineer, I want a common API so that I can support data scientists by providing model output serialization in a SDK and so that my applications can easily consume machine learning predictions
-- As a technical manager, I want a common API so that my project teams spend less time fixing breaking jobs and writing custom logic
+- As a data scientist, I require a common API, so that I can quickly create inference output for my models, which automatically implements production best practices agreed on by the group
+- Also, as a data engineer, I require a common API to to allow seamless and stable communication between machine learning models and microservices in my big data pipelines 
+-  As a software engineer, I require a common API so that I can support data scientists by providing model output serialization in a SDK and so that my applications can easily consume machine learning predictions
+- As a technical manager, I require a common API so that my project teams spend less time fixing breaking jobs and writing custom logic
 
